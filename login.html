@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login or Sign Up</title>
+  <link rel="stylesheet" href="/static/stylesheets/login_style.css">
+
+</head>
+<body>
+  
+  <div class="container">
+    <h1>Welcome!</h1>
+    <div class="form-wrapper">
+      <ul class="nav-tabs">
+        <li class="active">Sign In</li>
+        <li>Sign Up</li>
+      </ul>
+      <div class="form-content">
+        <form id="sign-in-form">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+          <button type="submit">Sign In</button>
+        </form>
+        <form id="sign-up-form" style="display: none;">
+          <label for="new-username">Username:</label>
+          <input type="text" id="new-username" name="new_username" required>
+          <label for="new-password">Password:</label>
+          <input type="password" id="new-password" name="new_password" required>
+          <button type="submit">Sign Up</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

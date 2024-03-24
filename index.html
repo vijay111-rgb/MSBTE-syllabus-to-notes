@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Image/PDF to Text Converter</title>
+        <!-- Link to external CSS file by your friend vijay -->
+        <link rel="stylesheet" href="../static/stylesheets/style.css " />
+
+       
+    </head>
+    <body>
+       
+        <header>
+            <div class="logo">
+                <img src="..\static\logo.jpeg" alt="Logo">
+            </div>
+            <nav>
+                <ul>
+                 <li><a href="/">Home</a></li>
+                    <li><a href="/static/about.html">About</a></li>
+                    <li><a href="../static/login.html">Login</a></li>
+                </ul>
+            </nav>
+        <!-- </header> -->
+ 
+<div class="header" role="banner">
+   <h1 class="logo">
+    <a href="#">img/pdf to <span>notes</span></a>
+          </h1>
+          <div class="nav-wrap">
+            <nav class="main-nav" role="navigation">
+              <ul class="unstyled list-hover-slide">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Work</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Blog</a></li>
+              </ul>
+            </nav>
+           
+            <ul class="social-links list-inline unstyled list-hover-slide">
+             
+              <a href="/static/aboutus.html">About Us</a> 
+                <a href="/static/Career.html">Career</a>
+                <a href="/static/privacy.html">Privacy/Terms</a>
+                <a href="/static/Credit.html">Credit </a>
+                <a href="/static/ContactUs.html" >ContactUs</a>
+             
+            </ul>
+          </div>
+</div>
+        </header>
+        
+<h1 class="text2">Instruction </h1>
+<div class="container">
+	<div class="slideshow">
+		<div id="slide-1" class="slide">
+			<a href="#slide-7"></a>
+			<a href="#slide-2"></a>
+			<img src="../static/image/step1.jpeg" />
+		</div>
+		<div id="slide-2" class="slide">
+			<a href="#slide-1"></a>
+			<a href="#slide-3"></a>
+			<img src="../static/image/step1output.jpeg" />
+		</div>
+		<div id="slide-3" class="slide">
+			<a href="#slide-2"></a>
+			<a href="#slide-4"></a>
+			<img src="../static/image/step2.jpeg" />
+		</div>
+		<div id="slide-4" class="slide">
+			<a href="#slide-3"></a>
+			<a href="#slide-5"></a>
+			<img src="../static/image/step3.jpeg" />
+		</div>
+		<div id="slide-5" class="slide">
+			<a href="#slide-4"></a>
+			<a href="#slide-6"></a>
+			<img src="../static/image/step4output.jpeg" />
+		</div>
+		<div id="slide-6" class="slide">
+			<a href="#slide-5"></a>
+			<a href="#slide-7"></a>
+			<img src="../static/image/step5.jpeg" />
+		</div>
+		<div id="slide-7" class="slide">
+			<a href="#slide-6"></a>
+			<a href="#slide-1"></a>
+			<img src="../static/image/step5output.jpeg" />
+		</div>
+	</div>
+  <div class="pagination">
+    <a href="../static/logo.jpeg"><span>1</span></a>
+    <a href="#slide-2"><span>2</span></a>
+    <a href="#slide-3"><span>3</span></a>
+    <a href="#slide-4"><span>4</span></a>
+    <a href="#slide-5"><span>5</span></a>
+    <a href="#slide-6"><span>6</span></a>
+    <a href="#slide-7"><span>7</span></a>
+  </div>
+</div>
+
+<aside>  
+    
+        <h1 class="text2">Image/PDF to Text Converter</h1>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <input class="FileChoose" type="file" name="file" accept=".pdf, .png, .jpg, .jpeg, .gif, .bmp" >
+            <button type="submit" class="UploadButton">Upload</button>
+        </form>
+    
+        {% if text_pages %}
+            <h2>Extracted Text</h2>
+            {% for text_page in text_pages %}
+                <pre>{{ text_page }}</pre>
+            {% endfor %}
+            <div>
+                <!-- Download buttons which took me(vijay) a day to make  -->
+                <form action="/download" method="post">
+                    <button class="downloadButton" type="submit" name="format" value="text">Download as Text</button>
+                    <button class="downloadButton" type="submit" name="format" value="word">Download as Word</button>
+                    <input type="hidden" name="text_data" value="{{ '\n'.join(text_pages) }}">
+                </form>
+            </div>
+            
+            
+        {% endif %}
+
+        <aside><h1 class="text2">Search Agent</h1>
+            <div>    
+                <form action="/search" method="post" target="_blank"> <!-- Add target="_blank" attribute -->
+                    <label class="text3" for="search_text">Enter Search Text:</label><br>
+                    <input class="input" type="text" placeholder="search topic here" id="search_text" name="search_text" required><br><br>
+                    <input type="radio" id="google" name="search_engine" value="google" checked>
+                    <label for="google">Google</label><br>
+                    <input type="radio" id="duckduckgo" name="search_engine" value="duckduckgo">
+                    <label for="duckduckgo">DuckDuckGo</label><br>
+                    <input type="radio" id="brave" name="search_engine" value="brave">
+                    <label for="brave">Brave</label><br><br>
+                    <input class="UploadButton" type="submit" value="Search">
+                </form>
+            </div>
+        </aside>
+        <h1 class="text2">Search Topic</h1>
+        <form action="/gem" method="POST">
+            <label class="text3" for="text">Enter Text to be searched:</label>
+            <input class="text" type="text" placeholder="search topic here" id="para" name="para" required><br><br>                   
+            <br>
+            <input class="UploadButton" type="submit" value="find notes">
+        </form>
+        <br>
+        {% if result %}
+            <p><b>Result found:</b></p>
+            <p>{{ result | safe}}</p>
+     
+        {% endif %}
+        {% if error %}
+            <p style="color: red;"><b>Error:</b> {{ error }}</p>
+        {% endif %}
+        <h1 class="text2">Extract Websites From given text</h1>
+        <form action="/exweb" method="POST">
+            <label class="text3" for="text">Enter Text:</label>
+            <input class="text" type="text" placeholder="search topic here" id="text" name="text" required><br><br>                   
+            <!-- <textarea name="text" id="text" rows="10" cols="50"></textarea> -->
+            <br>
+            <input class="UploadButton" type="submit" value="Extract Websites">
+        </form>
+        <div>   
+
+        </div>
+        {% if websites %}
+        <h2>Extracted Websites</h2>
+        <ul>
+            {% for website in websites %}
+            <li><a href="{{ website }}">{{ website }}</a></li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No websites found in the text.</p>
+        {% endif %}
+        
+      
+    </body>
+    </html>
+    
